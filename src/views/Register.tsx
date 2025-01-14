@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ConfigProvider, Message, Input, Button } from "@arco-design/web-react";
-import { IconFire, IconUser, IconLock, IconPhone } from "@arco-design/web-react/icon";
+import { IconUser, IconLock, IconPhone } from "@arco-design/web-react/icon";
 import zhCN from "@arco-design/web-react/es/locale/zh-CN";
 import enUS from "@arco-design/web-react/es/locale/en-US";
 import { useGlobalStore } from "../store";
@@ -59,8 +59,8 @@ function Login() {
           <img className="w-72 mr-4" src="/src/assets/image/cat.png" />
           <div>
             <div className="flex items-center justify-center border-gray-20">
-              <div className="logo h-12 w-12 rounded flex items-center justify-center flex-shrink-0">
-                <IconFire className="text-3xl" style={{ color: "white" }} />
+              <div className="h-12 w-12 rounded flex items-center justify-center flex-shrink-0">
+                <img className="text-2xl" src="./src/assets/image/hmos-logo.png" />
               </div>
               <div className="title text-2xl font-bold ml-4">HMOS App Store</div>
             </div>

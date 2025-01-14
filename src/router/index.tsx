@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import App from "../App.tsx";
-import ErrorPage from "../views/ErrorPage.tsx";
+import ErrorPage from "../pages/error";
 import Register from "../views/Register.tsx";
 import Page3 from "../views/Page3.tsx";
 import Page4 from "../views/Page4.tsx";

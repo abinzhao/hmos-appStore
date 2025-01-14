@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Menu } from "@arco-design/web-react";
-import { IconSettings, IconFire, IconBook, IconHome } from "@arco-design/web-react/icon";
+import { IconHome, IconApps, IconUser } from "@arco-design/web-react/icon";
 import { useTranslation } from "react-i18next";
 import { useGlobalStore } from "../../store";
 
@@ -57,7 +57,7 @@ function SideBar() {
           addRouterHistory("/appMarket");
           navigate("/appMarket");
         }}>
-        <IconHome />
+        <IconApps />
         {t("appMarket")}
       </MenuItem>
       <MenuItem
@@ -66,7 +66,7 @@ function SideBar() {
           addRouterHistory("/userCenter");
           navigate("/userCenter");
         }}>
-        <IconHome />
+        <IconUser />
         {t("userCenter")}
       </MenuItem>
       {/* {menu.map((item) => {
@@ -98,8 +98,8 @@ function SideBar() {
   return (
     <>
       <div className="flex items-center justify-start pl-4 h-16 border-b border-solid border-gray-20">
-        <div className="logo h-8 w-8 rounded flex items-center justify-center flex-shrink-0">
-          <IconFire className="text-2xl" style={{ color: "white" }} />
+        <div className="h-8 w-8 rounded flex items-center justify-center flex-shrink-0">
+          <img className="text-2xl" src="./src/assets/image/hmos-logo.png" />
         </div>
         {!isCollapsed && <div className="title text-xl font-bold ml-2">HMOS App Store</div>}
       </div>
