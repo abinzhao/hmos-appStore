@@ -73,7 +73,7 @@ function Login() {
                 size="large"
                 prefix={<IconPhone />}
                 allowClear
-                placeholder={t("请输入手机号")}
+                placeholder={t("inputPhoneNumber")}
               />
             </div>
             <div className="mt-5 w-72">
@@ -85,7 +85,7 @@ function Login() {
                 size="large"
                 prefix={<IconUser />}
                 allowClear
-                placeholder={t("请输入用户名")}
+                placeholder={t("inputUserName")}
               />
             </div>
             <div className="mt-5 w-72">
@@ -97,18 +97,18 @@ function Login() {
                 size="large"
                 prefix={<IconLock />}
                 allowClear
-                placeholder={t("请输入密码")}
+                placeholder={t("inputPassword")}
               />
             </div>
             <div className="flex items-center justify-between mt-8">
               <Button type="outline" size="large" onClick={experience}>
-                {t("一键体验")}
+                {t("oneClickExperience")}
               </Button>
               <Button type="outline" size="large" onClick={() => navigate("/login")}>
-                {t("返回登录")}
+                {t("returnToLogin")}
               </Button>
               <Button type="primary" size="large" onClick={register}>
-                {t("注册")}
+                {t("register")}
               </Button>
             </div>
           </div>

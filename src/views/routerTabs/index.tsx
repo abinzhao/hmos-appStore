@@ -41,7 +41,7 @@ function RouterTabs() {
     <div
       className="p-4 border-b border-solid border-gray-200"
       style={{ backgroundColor: "var(--color-bg-3)" }}>
-      <Tabs
+      {/* <Tabs
         type="card-gutter"
         editable
         onClickTab={(key) => navigate(key)}
@@ -50,7 +50,7 @@ function RouterTabs() {
         {routerHistory.map((pathname) => (
           <TabPane destroyOnHide key={pathname} title={t(routerNameMap[pathname])}></TabPane>
         ))}
-      </Tabs>
+      </Tabs> */}
     </div>
   );
 }

@@ -1,0 +1,42 @@
+.app-item-card {
+    background-color: var(--color-fill-1);
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 8px;
+    cursor: pointer;
+
+    .icon {
+        width: 50%;
+        border-radius: 12px;
+    }
+
+    .info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &-title{
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 6px;
+            color: var(--color-text-1);
+        }
+
+        &-description{
+            color: var(--color-text-2);
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 12px;
+        }
+    }
+}
+.app-item-card:hover {
+    background-color: var(--color-fill-1);
+    box-shadow: 0 0 6px 0 var(--color-text-4);
+    transform: scale(1.02);
+    transition: all 0.2s;
+}

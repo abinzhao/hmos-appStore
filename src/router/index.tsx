@@ -2,8 +2,6 @@ import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 import App from "../App.tsx";
 import ErrorPage from "../pages/error";
 import Register from "../views/Register.tsx";
-import Page3 from "../views/Page3.tsx";
-import Page4 from "../views/Page4.tsx";
 import AppMarketPage from "../pages/app-market/index.tsx";
 import UserCenterPage from "../pages/user-center/index.tsx";
 import HomePage from "../pages/home/index.tsx";
@@ -33,14 +31,6 @@ const router = createBrowserRouter([
       {
         path: "/userCenter",
         element: <UserCenterPage />,
-      },
-      {
-        path: "/page3",
-        element: <Page3 />,
-      },
-      {
-        path: "/page4",
-        element: <Page4 />,
       },
       {
         path: "/",

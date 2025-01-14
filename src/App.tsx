@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import zhCN from "@arco-design/web-react/es/locale/zh-CN";
 import enUS from "@arco-design/web-react/es/locale/en-US";
 import AppHeader from "./views/header";
-import RouterTabs from "./views/routerTabs";
 import SideBar from "./views/sideBar";
 import "./App.css";
 import { useGlobalStore, useUserStore } from "./store";
@@ -20,8 +19,7 @@ const collapsedWidth = 70;
 
 function App() {
   const navigator = useNavigate();
-  const { isCollapsed, setIsCollapsed, locale, routerHistory, siderWidth, setSiderWidth } =
-    useGlobalStore();
+  const { isCollapsed, setIsCollapsed, locale, siderWidth, setSiderWidth } = useGlobalStore();
   const { i18n } = useTranslation();
   const { setUser } = useUserStore();
   const [localeConfig, setLocaleConfig] = useState(zhCN);
@@ -83,7 +81,7 @@ function App() {
           </Sider>
           <Layout style={{ overflow: "hidden" }}>
             <AppHeader></AppHeader>
-            {routerHistory.length ? <RouterTabs></RouterTabs> : null}
+            {/* {routerHistory.length ? <RouterTabs></RouterTabs> : null} */}
             <Layout style={{ padding: "20px" }}>
               <Content>
                 <Outlet />

@@ -1,0 +1,6 @@
+.app-market-page {
+    /* display: flex; */
+}
+.arco-tabs-header-nav-capsule .arco-tabs-header-wrapper {
+    justify-content: flex-start !important;
+}

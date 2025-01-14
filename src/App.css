@@ -25,7 +25,8 @@
 }
 .arco-layout {
   min-height: 0;
-  overflow: auto;
+  overflow: hidden;
+  height: 100vh;
 }
 
 .layout-collapse-demo {
