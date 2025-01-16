@@ -54,7 +54,31 @@ async function getMessageList(type: string) {
     return response
 }
 
+async function setApp(data: any) {
+    const response = await httpFront.post("/log/add/app", data)
+    return response
+}
+
+async function updateApp(data: any) {
+    const response = await httpFront.post("/log/update/app", data)
+    return response
+}
+
+async function removeApp(id: any) {
+    const response = await httpFront.post("/log/remove/app", { id })
+    return response
+}
+
+async function getAppDetail(id: any) {
+    const response = await httpFront.post("/log/detail/app", { id })
+    return response
+}
+
 export default {
     getApplist,
     getMessageList,
+    setApp,
+    updateApp,
+    removeApp,
+    getAppDetail,
 }

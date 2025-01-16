@@ -12,9 +12,8 @@ export default {
     systemMessage: "System Message",
     softwareMessage: "Software Message",
     userFeedback: "User Feedback",
-
-    "欢迎使用 HMOS App Store 🎉": "Welcome to HMOS App Store 🎉",
-    "种一棵树最好的时间是十年前，其次是现在。": "The best time to plant a tree was ten years ago, followed by now",
+    welcomeHMOSAppStore: "Welcome to HMOS App Store 🎉",
+    programmingDesc: "Programming is a language that creates endless possibilities. I am a poet of code, and my stories are woven on the screen.",
     inputPhoneNumber: "Please enter your mobile number",
     inputUserName: "Please enter your username",
     inputPassword: "Please enter your password",
@@ -22,4 +21,11 @@ export default {
     returnToLogin: "Login",
     register: "Register",
     login: "Login",
+    appTotal: "APP Total Number",
+    totalInstallations: "Total installations",
+    submitSoftware: "Upload software",
+    appEdit: "Edit",
+    appRemoved: "Removed",
+    appRemovedPupupTitle: "Remove App",
+    appRemovedPupupDesc: "Are you sure you want to remove the software? This will delete the software simultaneously, please operate with caution.",
 }

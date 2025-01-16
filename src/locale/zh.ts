@@ -1,6 +1,6 @@
 export default {
     noPage: "访问页面不存在",
-    home: "首页",
+    home: "概览",
     appMarket: "应用市场",
     userCenter: "个人中心",
     alreadyOnShelves: "已上架",
@@ -12,9 +12,8 @@ export default {
     systemMessage: "系统消息",
     softwareMessage: "软件留言",
     userFeedback: "用户反馈",
-
-    "欢迎使用 HMOS App Store 🎉": "欢迎使用 HMOS App Store 🎉",
-    "种一棵树最好的时间是十年前，其次是现在。": "种一棵树最好的时间是十年前，其次是现在。",
+    welcomeHMOSAppStore: "欢迎使用 HMOS App Store 🎉",
+    programmingDesc: "编程是一门语言，能够创造无限可能。我是代码的诗人，我的故事在屏幕上编织。",
     inputPhoneNumber: "请输入手机号",
     inputUserName: "请输入用户名",
     inputPassword: "请输入密码",
@@ -22,4 +21,11 @@ export default {
     returnToLogin: "返回登录",
     register: "注册",
     login: "登录",
+    appTotal: "APP总数",
+    totalInstallations: "总安装次数",
+    submitSoftware: "上传软件",
+    appEdit: "编辑",
+    appRemoved: "下架",
+    appRemovedPupupTitle: "下架软件",
+    appRemovedPupupDesc: "你确认要下架软件？这会同步删除该软件，请慎重操作。",
 }

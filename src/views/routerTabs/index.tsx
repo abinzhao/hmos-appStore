@@ -1,17 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Tabs } from "@arco-design/web-react";
 import { useTranslation } from "react-i18next";
 import { useGlobalStore } from "../../store";
 
-const TabPane = Tabs.TabPane;
-const routerNameMap: { [key: string]: string } = {
-  "/home": "home",
-  "/appMarket": "appMarket",
-  "/userCenter": "userCenter",
-  "/page3": "系统设置一",
-  "/page4": "系统设置二",
-};
 function RouterTabs() {
   const { t } = useTranslation();
   const location = useLocation();

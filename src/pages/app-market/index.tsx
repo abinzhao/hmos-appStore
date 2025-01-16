@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { Card, Empty, List, Message, Spin, Tabs } from "@arco-design/web-react";
+import { Button, Card, Empty, List, Message, Spin, Tabs } from "@arco-design/web-react";
 import { useEffect, useState } from "react";
 import NotFoundPng from "../../assets/image/404.png";
 import AppItemCard from "./item-card";
 import appMarketRequest from "../../http/api/app-market";
+import { IconShareExternal } from "@arco-design/web-react/icon";
+import { useNavigate } from "react-router-dom";
 
 const TabPane = Tabs.TabPane;
 
@@ -13,15 +15,16 @@ const style: React.CSSProperties = {
 
 function AppMarketPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [tab, setTab] = useState<string>("alreadyOnShelves");
+  const [mockData, setMockData] = useState([]);
+  const [loading, setLoading] = useState<any>(false);
+
   const TabsData = [
     { title: t("alreadyOnShelves"), value: "alreadyOnShelves" },
     { title: t("pendingListing"), value: "pendingListing" },
     { title: t("underReview"), value: "underReview" },
   ];
-
-  const [mockData, setMockData] = useState([]);
-  const [loading, setLoading] = useState<any>(false);
 
   const getApplist = async (tab: string) => {
     try {
@@ -49,12 +52,21 @@ function AppMarketPage() {
           overflow: "auto",
           borderRadius: "12px",
         }}>
+        <Button
+          type="primary"
+          icon={<IconShareExternal />}
+          onClick={() => {
+            navigate("/editApp");
+          }}>
+          {t("submitSoftware")}
+        </Button>
         <Tabs
           tabPosition="top"
           animation
           justify
           style={style}
           type="capsule"
+          size="large"
           activeTab={tab}
           onChange={(value) => setTab(value)}>
           {TabsData.map((item) => (

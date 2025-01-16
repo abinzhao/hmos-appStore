@@ -60,7 +60,7 @@ function SideBar() {
         <IconApps />
         {t("appMarket")}
       </MenuItem>
-      <MenuItem
+      {/* <MenuItem
         key="/userCenter"
         onClick={() => {
           addRouterHistory("/userCenter");
@@ -68,7 +68,7 @@ function SideBar() {
         }}>
         <IconUser />
         {t("userCenter")}
-      </MenuItem>
+      </MenuItem> */}
       {/* {menu.map((item) => {
         return (
           <SubMenu

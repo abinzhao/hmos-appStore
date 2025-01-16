@@ -1,0 +1,9 @@
+.home-page {
+    height: calc(100vh - 155px);
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .arco-card-size-default .arco-card-body {
+        width: 100%;
+    }
+}
