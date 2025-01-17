@@ -1,0 +1,32 @@
+.container {
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.info {
+  flex: 1;
+}
+
+.info h1 {
+  margin-bottom: 16px;
+}
+
+.screenshots {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 8px 0;
+}
+
+.screenshot {
+  flex-shrink: 0;
+}
+
+.comments {
+  margin-top: 24px;
+}

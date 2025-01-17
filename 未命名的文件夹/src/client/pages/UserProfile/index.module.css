@@ -1,0 +1,16 @@
+.container {
+  padding: 24px;
+}
+
+.card {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+:global(.ant-tabs-nav) {
+  margin-bottom: 24px;
+}
+
+:global(.ant-form) {
+  max-width: 400px;
+}

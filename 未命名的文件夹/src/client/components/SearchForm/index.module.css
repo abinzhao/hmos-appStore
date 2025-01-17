@@ -1,0 +1,14 @@
+.searchForm {
+  margin-bottom: 24px;
+}
+
+.searchForm :global(.ant-form) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.searchForm :global(.ant-form-item) {
+  margin-bottom: 0;
+  flex: 0 0 auto;
+}

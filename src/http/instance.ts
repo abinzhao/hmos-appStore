@@ -3,7 +3,7 @@ import { Message } from "@arco-design/web-react"
 
 const httpOther: HttpClient = useHttpClient({ baseURL: "http://www.monitor.okoknb.cn" })
 
-const httpFront: HttpClient = useHttpClient({ baseURL: "http://localhost:3000" })
+const httpFront: HttpClient = useHttpClient({ baseURL: "http://8.140.239.170:3004" })
 httpFront.onRequestSuccess((response) => { })
 httpFront.onRequestError((error) => {
   Message.error(error.message)

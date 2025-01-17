@@ -5,18 +5,18 @@ async function experience() {
   return response
 }
 
-async function login(params: { phone: string; password: string }) {
-  const response = await httpFront.post("/user/login", params)
+async function login(params: { username: string; password: string }) {
+  const response = await httpFront.post("/api/login", params)
   return response
 }
 
 async function register(params: { phone: string; username: string; password: string }) {
-  const response = await httpFront.post("/user/register", params)
+  const response = await httpFront.post("/api/register", params)
   return response
 }
 
-async function getUser() {
-  const response = await httpFront.get("/user/me")
+async function getUser(id: any) {
+  const response = await httpFront.get(`/api/user?userId=${id}`)
   return response
 }
 

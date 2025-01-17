@@ -1,0 +1,14 @@
+.container {
+  padding: 24px;
+}
+
+:global(.ant-table-wrapper) {
+  background: #fff;
+  padding: 24px;
+  border-radius: 2px;
+}
+
+:global(.ant-modal-body) {
+  max-height: 600px;
+  overflow-y: auto;
+}

@@ -10,7 +10,7 @@ import { userRequest } from "../../http/api";
 
 function LoginPage() {
   const navigate = useNavigate();
-  const [phone, setPhone] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { theme, locale } = useGlobalStore();
   function toggleTheme() {
@@ -41,7 +41,7 @@ function LoginPage() {
   }, []);
 
   async function login() {
-    const res = await userRequest.login({ phone, password });
+    const res = await userRequest.login({ username, password });
     const token = `Bearer ${res.data}`;
     localStorage.setItem("token", token);
     navigate("/home");
@@ -67,14 +67,14 @@ function LoginPage() {
             </div>
             <div className="mt-8 w-72">
               <Input
-                value={phone}
+                value={username}
                 onChange={(v) => {
-                  setPhone(v);
+                  setUsername(v);
                 }}
                 size="large"
                 prefix={<IconUser />}
                 allowClear
-                placeholder={t("inputPhoneNumber")}
+                placeholder={t("inputUserName")}
               />
             </div>
             <div className="mt-5 w-72">
