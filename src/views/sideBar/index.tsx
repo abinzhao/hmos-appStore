@@ -13,6 +13,7 @@ function SideBar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { isCollapsed, addRouterHistory } = useGlobalStore();
+  const isAdmin = localStorage.getItem("experience");
   // const menu = [
   //   {
   //     key: "2",
@@ -60,6 +61,28 @@ function SideBar() {
         <IconApps />
         {t("appMarket")}
       </MenuItem>
+      {isAdmin === "true" && (
+        <MenuItem
+          key="/adminApp"
+          onClick={() => {
+            addRouterHistory("/adminApp");
+            navigate("/adminApp");
+          }}>
+          <IconApps />
+          软件管理
+        </MenuItem>
+      )}
+      {isAdmin === "true" && (
+        <MenuItem
+          key="/adminUser"
+          onClick={() => {
+            addRouterHistory("/adminApp?type=adminUser");
+            navigate("/adminApp?type=adminUser");
+          }}>
+          <IconApps />
+          用户管理
+        </MenuItem>
+      )}
       {/* <MenuItem
         key="/userCenter"
         onClick={() => {

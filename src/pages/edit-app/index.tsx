@@ -117,6 +117,7 @@ function EditAPPPage() {
           </Button>
           <Button
             style={{ marginRight: 24 }}
+            disabled={false}
             onClick={() => {
               navigate("/appMarket");
             }}>

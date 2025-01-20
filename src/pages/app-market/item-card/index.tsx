@@ -12,7 +12,7 @@ const AppItemCard = (props: AppItemCardProps) => {
   const navigate = useNavigate();
 
   return (
-    <div className="app-item-card" onClick={() => navigate(`/editApp?id=${data?.id}&type=detail`)}>
+    <div className="app-item-card">
       <Space direction="vertical">
         <Image className="icon" src={data?.icon} preview={false} />
         <div className="info">

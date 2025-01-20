@@ -1,0 +1,20 @@
+.home-page {
+    height: calc(100vh - 155px);
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .arco-card-size-default .arco-card-body {
+        width: 100%;
+    }
+    /* index.scss */
+.even-row {
+    background-color: #f8f8f8;
+  }
+  .odd-row {
+    background-color: #fff;
+  }
+  .table-header {
+    background-color: #e5e5e5;
+    font-weight: bold;
+  }
+}

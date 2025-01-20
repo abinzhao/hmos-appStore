@@ -7,6 +7,7 @@ import UserCenterPage from "../pages/user-center/index.tsx";
 import HomePage from "../pages/home/index.tsx";
 import LoginPage from "../pages/login/index.tsx";
 import EditAPPPage from "../pages/edit-app/index.tsx";
+import AdminAppPage from "../pages/admin-app/index.tsx";
 const router = createBrowserRouter([
   {
     path: "/register",
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/editApp",
         element: <EditAPPPage />,
+      },
+      {
+        path: "/adminApp",
+        element: <AdminAppPage />,
       },
       {
         path: "/",
