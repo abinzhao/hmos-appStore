@@ -21,7 +21,6 @@ function AppMarketPage() {
   const [category, setCategory] = useState<string>("");
   const [mockData, setMockData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]); // 假设从API获取分类列表
 
   const TabsData = [
     { title: t("alreadyOnShelves"), value: "3" },
@@ -29,27 +28,14 @@ function AppMarketPage() {
     { title: t("underReview"), value: "1" },
   ];
 
-  useEffect(() => {
-    // 获取所有分类
-    /*const fetchCategories = async () => {
-      try {
-        const res = await appMarketRequest.getCategories(); // 假设有这个API可以获取分类
-        setCategories(res);
-      } catch (error) {
-        Message.error(t("APIerror"));
-      }
-    };
-    fetchCategories();*/
-  }, []);
-
   const getApplist = async (tab: string) => {
     try {
       setLoading(true);
-      let params = {
+      const params: any = {
         application_status: tab,
       };
       if (category) {
-        params['category'] = JSON.stringify(category); // 添加分类作为请求参数
+        params["category"] = JSON.stringify(category); // 添加分类作为请求参数
       }
       const res = await appMarketRequest.getApplist(params);
       setMockData(res);

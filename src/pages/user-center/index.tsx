@@ -11,79 +11,88 @@ import { frontBaseURL } from "../../http/instance";
 function UserCenterPage() {
   const { t } = useTranslation();
   const [direction, setDirection] = useState("systemMessage");
-  const [mockData, setMockData] = useState([]);
+  const [mockData, setMockData] = useState<any>([]);
   const [scrollLoading, setScrollLoading] = useState<any>(<Spin loading={true} />);
   const [formData, setFormData] = useState(useUserStore.getState().user);
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState<any[]>([]);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
 
   const fetchData = (currentPage: number) => {
     if (direction === "systemMessage") {
-      systemMessageRequest.getSystemMessages({
-        page: currentPage,
-        pageSize: 10,
-      }).then((res) => {
-        // Extract the new messages from the response
-        const newMessages = res.data.sysMessage || [];
+      systemMessageRequest
+        .getSystemMessages({
+          page: currentPage,
+          pageSize: 10,
+        })
+        .then((res) => {
+          // Extract the new messages from the response
+          const newMessages = res.data.sysMessage || [];
 
-        // Filter out any messages that already exist in mockData based on their id
-        const filteredNewMessages = newMessages.filter((newMsg: { id: any; }) =>
-          !mockData.some(existingMsg => existingMsg.id === newMsg.id)
-        );
+          // Filter out any messages that already exist in mockData based on their id
+          const filteredNewMessages = newMessages.filter(
+            (newMsg: { id: any }) =>
+              !mockData.some((existingMsg: { id: any }) => existingMsg.id === newMsg.id)
+          );
 
-        // Update the state with the new filtered messages
-        setMockData((prevMockData) => [...prevMockData, ...filteredNewMessages]);
-        if (res.data.sysMessage.length < 10) {
-          setScrollLoading("No more data");
-        } else {
-          setScrollLoading("下拉获取更多数据");
-        }
-      })
+          // Update the state with the new filtered messages
+          setMockData((prevMockData: any[]) => [...prevMockData, ...filteredNewMessages]);
+          if (res.data.sysMessage.length < 10) {
+            setScrollLoading("No more data");
+          } else {
+            setScrollLoading("下拉获取更多数据");
+          }
+        });
     } else if (direction === "softwareMessage") {
-      appMessageRequest.getMyMessages({
-        page: currentPage,
-        pageSize: 10,
-      }).then((res) => {
-        // Extract the new messages from the response
-        const newMessages = res.data.messages || [];
+      appMessageRequest
+        .getMyMessages({
+          page: currentPage,
+          pageSize: 10,
+        })
+        .then((res) => {
+          // Extract the new messages from the response
+          const newMessages = res.data.messages || [];
 
-        // Filter out any messages that already exist in mockData based on their id
-        const filteredNewMessages = newMessages.filter((newMsg: { id: any; }) =>
-          !mockData.some(existingMsg => existingMsg.id === newMsg.id)
-        );
+          // Filter out any messages that already exist in mockData based on their id
+          const filteredNewMessages = newMessages.filter(
+            (newMsg: { id: any }) =>
+              !mockData.some((existingMsg: { id: any }) => existingMsg.id === newMsg.id)
+          );
 
-        // Update the state with the new filtered messages
-        setMockData((prevMockData) => [...prevMockData, ...filteredNewMessages]);
-        if (res.data.messages.length < 10) {
-          setScrollLoading("No more data");
-        } else {
-          setScrollLoading("下拉获取更多数据");
-        }
-      })
+          // Update the state with the new filtered messages
+          setMockData((prevMockData: any[]) => [...prevMockData, ...filteredNewMessages]);
+          if (res.data.messages.length < 10) {
+            setScrollLoading("No more data");
+          } else {
+            setScrollLoading("下拉获取更多数据");
+          }
+        });
     } else if (direction === "userFeedback") {
-      appMessageRequest.getUserFeedbackMessages({
-        page: currentPage,
-        pageSize: 10,
-      }).then((res) => {
-        // Extract the new messages from the response
-        const newMessages = res.data.messages || [];
+      appMessageRequest
+        .getUserFeedbackMessages({
+          page: currentPage,
+          pageSize: 10,
+        })
+        .then((res) => {
+          // Extract the new messages from the response
+          const newMessages = res.data.messages || [];
 
-        // Filter out any messages that already exist in mockData based on their id
-        const filteredNewMessages = newMessages.filter((newMsg: { id: any; }) =>
-          !mockData.some(existingMsg => existingMsg.id === newMsg.id)
-        );
+          // Filter out any messages that already exist in mockData based on their id
+          const filteredNewMessages = newMessages.filter(
+            (newMsg: { id: any }) =>
+              !mockData.some((existingMsg: { id: any }) => existingMsg.id === newMsg.id)
+          );
 
-        // Update the state with the new filtered messages
-        setMockData((prevMockData) => [...prevMockData, ...filteredNewMessages]);
-        if (res.data.messages.length < 10) {
-          setScrollLoading("No more data");
-        } else {
-          setScrollLoading("下拉获取更多数据");
-        }
-      })
+          // Update the state with the new filtered messages
+          setMockData((prevMockData: any[]) => [...prevMockData, ...filteredNewMessages]);
+          if (res.data.messages.length < 10) {
+            setScrollLoading("No more data");
+          } else {
+            setScrollLoading("下拉获取更多数据");
+          }
+        });
     }
   };
-  const handleInputChange = (value, e) => {
+  const handleInputChange = (value: any, e: any) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,

@@ -2,7 +2,7 @@ import { Layout } from "@arco-design/web-react";
 import ToggleSider from "./ToggleSider";
 import ToggleLanguage from "./ToggleLanguage";
 import ToggleDarkMode from "./ToggleDarkMode";
-import ToggleFullscreen from "./ToggleFullscreen";
+// import ToggleFullscreen from "./ToggleFullscreen";
 import Github from "./Github";
 // import ToggleTheme from "./ToggleTheme";
 import UserInfo from "./UserInfo";
@@ -16,7 +16,7 @@ function AppHeader() {
       <div className="flex items-center pr-6">
         <ToggleLanguage></ToggleLanguage>
         <ToggleDarkMode></ToggleDarkMode>
-        <ToggleFullscreen></ToggleFullscreen>
+        {/* <ToggleFullscreen></ToggleFullscreen> */}
         <Github></Github>
         {/* <ToggleTheme></ToggleTheme> */}
         <UserInfo></UserInfo>

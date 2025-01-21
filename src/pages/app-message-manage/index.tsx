@@ -149,48 +149,42 @@ function AppMessageManage() {
 
   const columns = [
     {
-      title: '序号',
-      render: (_, __, index) => {
-        return index + 1;
+      title: "id",
+      dataIndex: "messgae_id",
+    },
+    {
+      title: "消息发布者",
+      dataIndex: "user_id",
+    },
+    {
+      title: "发布者名称",
+      dataIndex: "username",
+    },
+    {
+      title: "发布者昵称",
+      dataIndex: "nickname",
+    },
+    {
+      title: "包名",
+      dataIndex: "app_package_name",
+    },
+    {
+      title: "App名称",
+      dataIndex: "app_name",
+    },
+    {
+      title: "消息",
+      dataIndex: "message_text",
+    },
+    {
+      title: "发布时间",
+      dataIndex: "created_at",
+      render: (text) => {
+        return formatDate(text);
       },
     },
     {
-      title: 'id',
-      dataIndex: 'messgae_id',
-    },
-    {
-      title: '消息发布者',
-      dataIndex: 'user_id',
-    },
-    {
-      title: '发布者名称',
-      dataIndex: 'username',
-    },
-    {
-      title: '发布者昵称',
-      dataIndex: 'nickname',
-    },
-    {
-      title: '包名',
-      dataIndex: 'app_package_name',
-    },
-    {
-      title: 'App名称',
-      dataIndex: 'app_name',
-    },
-    {
-      title: '消息',
-      dataIndex: 'message_text',
-    },
-    {
-      title: '发布时间',
-      dataIndex: 'created_at',
-      render: (text) => {
-        return formatDate(text);
-      }
-    },
-    {
-      title: '操作',
+      title: "操作",
       render: (_, record: UserData) => (
         <Space>
           <Button
@@ -201,20 +195,11 @@ function AppMessageManage() {
               seteditingSysMessage(record);
               form.setFieldsValue(record);
               setVisible(true);
-            }}
-          >
+            }}>
             编辑
           </Button>
-          <Popconfirm
-            title="确定要删除该消息吗？"
-            onOk={() => handleDelete(record.messgae_id)}
-          >
-            <Button
-              type="text"
-              status="danger"
-              size="small"
-              icon={<IconDelete />}
-            >
+          <Popconfirm title="确定要删除该消息吗？" onOk={() => handleDelete(record.messgae_id)}>
+            <Button type="text" status="danger" size="small" icon={<IconDelete />}>
               删除
             </Button>
           </Popconfirm>

@@ -7,6 +7,7 @@ export interface RouteConfig {
   name: string;
   icon?: React.ReactNode;
   requiredRole?: 'admin' | 'user';
+  visible?: boolean;
 }
 
 export const routes: RouteConfig[] = [
@@ -35,7 +36,8 @@ export const routes: RouteConfig[] = [
     element: lazy(() => import('../pages/edit-app')),
     name: '编辑应用',
     icon: RouteIcons.editApp,
-    requiredRole: 'user'
+    requiredRole: 'user',
+    visible: true
   },
   {
     path: '/myAppManage',

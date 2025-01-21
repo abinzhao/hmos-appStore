@@ -116,7 +116,6 @@ function App() {
           </Sider>
           <Layout style={{ overflow: "hidden" }}>
             <AppHeader></AppHeader>
-            {/* {routerHistory.length ? <RouterTabs></RouterTabs> : null} */}
             <Layout style={{ padding: "20px" }}>
               <Content>
                 <Outlet />

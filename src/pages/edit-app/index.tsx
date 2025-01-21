@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Form, Input, Button, Card, Radio, Upload, Message, RulesProps, UploadProps, Modal, Progress, Alert, Icon } from "@arco-design/web-react";
+import { Form, Input, Button, Card, Radio, Upload, Message } from "@arco-design/web-react";
 import "./index.scss";
 import { appCategory, publishType } from "./contants";
 import { useNavigate } from "react-router-dom";
@@ -7,19 +7,26 @@ import { appMarketRequest } from "../../http/api";
 import { getUrlParams } from "../../utils";
 import { useEffect, useState } from "react";
 import { frontBaseURL, httpFront } from "../../http/instance";
-import { IconClose, IconEdit, IconFaceFrownFill, IconFileAudio, IconPlus, IconUpload } from "@arco-design/web-react/icon";
+import {
+  IconClose,
+  IconEdit,
+  IconFaceFrownFill,
+  IconFileAudio,
+  IconPlus,
+} from "@arco-design/web-react/icon";
 import React from "react";
 
 const FormItem = Form.Item;
 
 function EditAPPPage() {
   const [appCategoryValue, setAppCategoryValue] = useState<string>("其他");
-  const [icon, setIcon] = React.useState();
-  const csIcon = `arco-upload-list-item${icon && icon.status === 'error' ? ' is-error' : ''}`;
-  const [screenshot, setScreenshot] = React.useState();
-  const csScreenshot = `arco-upload-list-item${screenshot && screenshot.status === 'error' ? ' is-error' : ''}`;
-  const [file, setFile] = React.useState();
-  const cs = `arco-upload-list-item${file && file.status === 'error' ? ' is-error' : ''}`;
+  const [icon, setIcon] = React.useState<any>({});
+  const csIcon = `arco-upload-list-item${icon && icon.status === "error" ? " is-error" : ""}`;
+  const [screenshot, setScreenshot] = React.useState<any>();
+  const csScreenshot = `arco-upload-list-item${
+    screenshot && screenshot?.status === "error" ? " is-error" : ""
+  }`;
+  const [file, setFile] = React.useState<any>();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -37,31 +44,30 @@ function EditAPPPage() {
       // 设置基本表单数据，包括 app_category
       form.setFieldsValue({
         ...res.data,
-        app_category: categoryValue // 直接设置解析后的值
+        app_category: categoryValue, // 直接设置解析后的值
       });
 
       // 更新状态
       setAppCategoryValue(categoryValue);
       setTPublishType(res.data.publish_type);
       setIcon({
-        uid: '-1', // 唯一标识
-        name: res.data.app_icon.split('/').pop(), // 从路径中提取文件名
+        uid: "-1", // 唯一标识
+        name: res.data.app_icon.split("/").pop(), // 从路径中提取文件名
         url: `${frontBaseURL}/${res.data.app_icon}`, // 完整的文件URL
-        status: 'done'
-      })
+        status: "done",
+      });
       setScreenshot({
-        uid: '-2', // 唯一标识
-        name: res.data.app_screenshot.split('/').pop(), // 从路径中提取文件名
+        uid: "-2", // 唯一标识
+        name: res.data.app_screenshot.split("/").pop(), // 从路径中提取文件名
         url: `${frontBaseURL}/${res.data.app_screenshot}`, // 完整的文件URL
-        status: 'done'
-      })
+        status: "done",
+      });
       setFile({
-        uid: '-3', // 唯一标识
-        name: res.data.app_file_url.split('/').pop(), // 从路径中提取文件名
+        uid: "-3", // 唯一标识
+        name: res.data.app_file_url.split("/").pop(), // 从路径中提取文件名
         url: `${frontBaseURL}/${res.data.app_file_url}`, // 完整的文件URL
-        status: 'done'
-      })
-
+        status: "done",
+      });
     } catch (error: any) {
       Message.error(error?.message || t("APIerror"));
     }
@@ -71,7 +77,7 @@ function EditAPPPage() {
     try {
       const values = form.getFieldsValue();
       // 如果需要将 app_category 转换为 JSON 字符串
-      const submitValues = {
+      const submitValues: any = {
         ...values,
         app_category: values.app_category,
         publish_type: tPublishType,
@@ -92,19 +98,20 @@ function EditAPPPage() {
       console.log("🚀 ~ onSubmit ~ res:", res);
       Message.success("更新成功");
     } catch (error: any) {
-      console.log(error)
+      console.log(error);
     }
-
   };
 
   const handleFileUpload = async (file: string | Blob, type: string | Blob) => {
     try {
       const formData = new FormData();
-      formData.append("packageName", form.getFieldValue('app_package_name'));
+      formData.append("packageName", form.getFieldValue("app_package_name"));
       formData.append("type", type);
       formData.append("file", file);
 
       const response = await httpFront.post("/api/upload", formData, {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-expect-error
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -118,22 +125,22 @@ function EditAPPPage() {
   };
 
   // 处理文件变化的函数，现在考虑了多种文件类型和多个文件的情况
-  const handleFileChange = async (fileList, currentFile, type) => {
+  const handleFileChange = async (fileList: any, currentFile: any, type: any) => {
     try {
       if (!fileList || fileList.length === 0) {
-        form.setFieldValue(type === "icon" ? 'appIcon' : type === "screenshot" ? 'appScreenshot' : 'file', '');
+        form.setFieldValue(
+          type === "icon" ? "appIcon" : type === "screenshot" ? "appScreenshot" : "file",
+          ""
+        );
         return;
       }
 
       const validFiles = await Promise.all(
-        fileList.map(async (file) => {
-          if (file.status === 'done') {
-            //console.log('response', file.response)
-            //return file.response?.link;
+        fileList.map(async (file: any) => {
+          if (file.status === "done") {
             return file;
-          } else if (file.status === 'uploading') {
+          } else if (file.status === "uploading") {
             const link = await handleFileUpload(file.originFile, type);
-            //console.log("link", link);
             return link;
           }
           return null;
@@ -141,11 +148,11 @@ function EditAPPPage() {
       );
 
       // 如果是多图，则保留所有有效的链接；否则只保留第一个有效链接
-      const validLinks = validFiles.filter(link => link);
+      const validLinks = validFiles.filter((link) => link);
 
       form.setFieldValue(
-        type === "icon" ? 'appIcon' : type === "screenshot" ? 'appScreenshot' : 'appFileUrl',
-        type === "screenshot" ? validLinks[0] : validFiles[0] || ''
+        type === "icon" ? "appIcon" : type === "screenshot" ? "appScreenshot" : "appFileUrl",
+        type === "screenshot" ? validLinks[0] : validFiles[0] || ""
       );
       if (type === "screenshot") {
         setScreenshot({
@@ -158,13 +165,13 @@ function EditAPPPage() {
           ...currentFile,
           url: `${frontBaseURL}/${validFiles[0]}`,
           originUrlInfo: validFiles[0], // 保存原始链接信息
-        })
+        });
       } else if (type === "file") {
         setFile({
           ...currentFile,
           url: `${frontBaseURL}/${validFiles[0]}`,
           originUrlInfo: validFiles[0], // 保存原始链接信息
-        })
+        });
       }
     } catch (error) {
       console.error(error);
@@ -172,14 +179,14 @@ function EditAPPPage() {
   };
 
   // 动态获取上传属性的函数，现在接收三个参数：type, limit, multiple
-  const uploadProps = (type, limit = 1, multiple = false) => ({
+  const uploadProps = (type: any, limit = 1, multiple = false) => ({
     name: "file",
     accept: type === "file" ? ".apk,.hap" : "image/*", // 根据类型设定接受的文件格式
     multiple,
     beforeUpload: (file: any) => {
       if (type === "file") {
         const isValidType =
-          file.type === 'application/vnd.android.package-archive' || file.name.endsWith('.hap');
+          file.type === "application/vnd.android.package-archive" || file.name.endsWith(".hap");
         if (!isValidType) {
           Message.error(`只能上传APK或HAP文件!`);
           return false;
@@ -187,18 +194,16 @@ function EditAPPPage() {
       }
       return true;
     },
-    onProgress: (currentFile) => {
+    onProgress: (currentFile: any) => {
       if (type === "screenshot") {
-        setScreenshot(
-          currentFile,
-        );
+        setScreenshot(currentFile);
       } else if (type === "icon") {
-        setIcon(currentFile)
+        setIcon(currentFile);
       } else if (type === "file") {
-        setFile(currentFile)
+        setFile(currentFile);
       }
     },
-    onChange: async (info, currentFile) => {
+    onChange: async (info: any, currentFile: any) => {
       await handleFileChange(info, currentFile, type);
     },
     listType: type !== "file" ? "picture-card" : "text", // 包文件采用文本列表类型
@@ -208,21 +213,17 @@ function EditAPPPage() {
   const handleAppCategoryChange = (value: string) => {
     setAppCategoryValue(value);
     // 直接设置原始值，不需要 JSON.stringify
-    form.setFieldValue('app_category', value);
+    form.setFieldValue("app_category", value);
   };
   const handleAppPublishTypeChange = (value: string) => {
     setTPublishType(value);
     // 直接设置原始值，不需要 JSON.stringify
-    form.setFieldValue('public_type', value);
+    form.setFieldValue("public_type", value);
   };
 
   useEffect(() => {
     getDetail();
   }, []);
-
-  function h(IconClose: React.ForwardRefExoticComponent<import("@arco-design/web-react/icon").IconProps & React.RefAttributes<unknown>>): React.ReactNode {
-    throw new Error("Function not implemented.");
-  }
 
   return (
     <Card
@@ -255,11 +256,8 @@ function EditAPPPage() {
         </FormItem>
         <FormItem label="App分类" field="app_category" rules={[{ required: true }]}>
           <Radio.Group value={appCategoryValue} onChange={handleAppCategoryChange}>
-            {appCategory.map((item, index) => (
-              <Radio
-                key={item?.value}
-                value={item?.value}
-              >
+            {appCategory.map((item) => (
+              <Radio key={item?.value} value={item?.value}>
                 {item?.label}
               </Radio>
             ))}
@@ -268,34 +266,37 @@ function EditAPPPage() {
         <FormItem label="发布类型" field="publish_type" rules={[{ required: true }]}>
           {tPublishType && ""}
           <Radio.Group value={tPublishType} onChange={handleAppPublishTypeChange}>
-            {publishType.map((item, index) => {
-              return <Radio key={item?.value} value={item?.value}>{item?.label}</Radio>;
+            {publishType.map((item) => {
+              return (
+                <Radio key={item?.value} value={item?.value}>
+                  {item?.label}
+                </Radio>
+              );
             })}
           </Radio.Group>
         </FormItem>
         <FormItem label="App版本号" field="app_version">
           <Input placeholder="请输入App版本号" />
         </FormItem>
-        <FormItem label="App图标" field="app_icon" >
+        <FormItem label="App图标" field="app_icon">
           <Upload
             fileList={icon ? [icon] : []}
             showUploadList={false}
             onChange={async (info, currentFile) => {
               await handleFileChange(info, currentFile, "icon");
             }}
-            listType="picture-card"
-          >
+            listType="picture-card">
             <div className={csIcon}>
-              {icon && icon.url ? (
-                <div className='arco-upload-list-item-picture custom-upload-avatar'>
-                  <img src={icon.url} />
-                  <div className='arco-upload-list-item-picture-mask'>
+              {icon && icon?.url ? (
+                <div className="arco-upload-list-item-picture custom-upload-avatar">
+                  <img src={icon?.url} />
+                  <div className="arco-upload-list-item-picture-mask">
                     <IconEdit />
                   </div>
                 </div>
               ) : (
-                <div className='arco-upload-trigger-picture'>
-                  <div className='arco-upload-trigger-picture-text'>
+                <div className="arco-upload-trigger-picture">
+                  <div className="arco-upload-trigger-picture-text">
                     <IconPlus />
                     <div style={{ marginTop: 10, fontWeight: 600 }}>Upload</div>
                   </div>
@@ -311,19 +312,18 @@ function EditAPPPage() {
             }}
             listType="picture-card"
             showUploadList={false}
-            fileList={screenshot ? [screenshot] : []}
-          >
+            fileList={screenshot ? [screenshot] : []}>
             <div className={csScreenshot}>
-              {screenshot && screenshot.url ? (
-                <div className='arco-upload-list-item-picture custom-upload-avatar'>
-                  <img src={screenshot.url} />
-                  <div className='arco-upload-list-item-picture-mask'>
+              {screenshot && screenshot?.url ? (
+                <div className="arco-upload-list-item-picture custom-upload-avatar">
+                  <img src={screenshot?.url} />
+                  <div className="arco-upload-list-item-picture-mask">
                     <IconEdit />
                   </div>
                 </div>
               ) : (
-                <div className='arco-upload-trigger-picture'>
-                  <div className='arco-upload-trigger-picture-text'>
+                <div className="arco-upload-trigger-picture">
+                  <div className="arco-upload-trigger-picture-text">
                     <IconPlus />
                     <div style={{ marginTop: 10, fontWeight: 600 }}>Upload</div>
                   </div>
@@ -332,10 +332,7 @@ function EditAPPPage() {
             </div>
           </Upload>
         </FormItem>
-        <FormItem
-          label="应用包"
-          field="app_file_url"
-        >
+        <FormItem label="应用包" field="app_file_url">
           <Upload
             {...uploadProps("file")}
             listType="text"
@@ -353,25 +350,23 @@ function EditAPPPage() {
                     onClick={() => {
                       const tempUrl = file.url?.split(frontBaseURL)[1];
                       const tempUrlArr = tempUrl?.split("/") || [];
-                      const type = tempUrlArr[2] || '';
-                      const packageName = tempUrlArr[3] || '';
-                      const fileName = tempUrlArr[4] || '';
-                      console.log('tempUrlArr', tempUrlArr);
+                      const type = tempUrlArr[2] || "";
+                      const packageName = tempUrlArr[3] || "";
+                      const fileName = tempUrlArr[4] || "";
+                      console.log("tempUrlArr", tempUrlArr);
                       if (type && packageName && fileName) {
                         appMarketRequest.downloadFile(type, packageName, fileName, params?.id);
                       } else {
-                        console.error('Invalid URL structure:', file.url);
+                        console.error("Invalid URL structure:", file.url);
                       }
-                    }}
-                  >
+                    }}>
                     {file.name}
                   </a>
                 );
               },
-            }}
-          >
+            }}>
             <Button type="primary">
-              {form.getFieldValue('appPackage') ? '更改APK' : '点击上传APK'}
+              {form.getFieldValue("appPackage") ? "更改APK" : "点击上传APK"}
             </Button>
           </Upload>
         </FormItem>
