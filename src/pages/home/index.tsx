@@ -48,6 +48,8 @@ function HomePage() {
           } else {
             setScrollLoading("下拉获取更多数据");
           }
+        }).catch(() => {
+          setScrollLoading("No more data");
         });
     } else if (direction === "softwareMessage") {
       appMessageRequest
@@ -72,6 +74,8 @@ function HomePage() {
           } else {
             setScrollLoading("下拉获取更多数据");
           }
+        }).catch(() => {
+          setScrollLoading("No more data");
         });
     } else if (direction === "userFeedback") {
       appMessageRequest
@@ -96,6 +100,8 @@ function HomePage() {
           } else {
             setScrollLoading("下拉获取更多数据");
           }
+        }).catch(() => {
+          setScrollLoading("No more data");
         });
     }
   };
@@ -171,7 +177,7 @@ function HomePage() {
                     scrollLoading={scrollLoading}
                     onReachBottom={(currentPage) => fetchData(currentPage)}
                     bordered={false}
-                    dataSource={message}
+                    dataSource={message || []}
                     render={(item: any, index: number) => (
                       <List.Item key={index} className="message-item">
                         {direction === "systemMessage" || direction === "userFeedback" ? (
