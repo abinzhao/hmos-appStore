@@ -14,6 +14,6 @@ export const appStatus = [
 ]
 
 export const publishType = [
-    { label: '新应用', value: '新应用' },
-    { label: '迭代版本', value: '迭代版本' },
+    { label: '新应用', value: '0' },
+    { label: '迭代版本', value: '1' },
 ]

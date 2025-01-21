@@ -1,13 +1,14 @@
 import { useTranslation } from "react-i18next";
-import { Button, Card, Empty, List, Message, Spin, Tabs } from "@arco-design/web-react";
+import { Button, Card, Empty, List, Message, Spin, Tabs, Select } from "@arco-design/web-react";
 import { useEffect, useState } from "react";
 import NotFoundPng from "../../assets/image/404.png";
 import AppItemCard from "./item-card";
 import appMarketRequest from "../../http/api/app-market";
 import { IconShareExternal } from "@arco-design/web-react/icon";
 import { useNavigate } from "react-router-dom";
-
+import { appCategory } from "../edit-app/contants";
 const TabPane = Tabs.TabPane;
+const Option = Select.Option;
 
 const style: React.CSSProperties = {
   textAlign: "center",
@@ -16,31 +17,54 @@ const style: React.CSSProperties = {
 function AppMarketPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [tab, setTab] = useState<string>("alreadyOnShelves");
+  const [tab, setTab] = useState<string>("3");
+  const [category, setCategory] = useState<string>("");
   const [mockData, setMockData] = useState([]);
-  const [loading, setLoading] = useState<any>(false);
+  const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([]); // 假设从API获取分类列表
 
   const TabsData = [
-    { title: t("alreadyOnShelves"), value: "alreadyOnShelves" },
-    { title: t("pendingListing"), value: "pendingListing" },
-    { title: t("underReview"), value: "underReview" },
+    { title: t("alreadyOnShelves"), value: "3" },
+    { title: t("pendingListing"), value: "2" },
+    { title: t("underReview"), value: "1" },
   ];
+
+  useEffect(() => {
+    // 获取所有分类
+    /*const fetchCategories = async () => {
+      try {
+        const res = await appMarketRequest.getCategories(); // 假设有这个API可以获取分类
+        setCategories(res);
+      } catch (error) {
+        Message.error(t("APIerror"));
+      }
+    };
+    fetchCategories();*/
+  }, []);
 
   const getApplist = async (tab: string) => {
     try {
       setLoading(true);
-      const res = await appMarketRequest.getApplist(tab);
+      let params = {
+        application_status: tab,
+      };
+      if (category) {
+        params['category'] = JSON.stringify(category); // 添加分类作为请求参数
+      }
+      const res = await appMarketRequest.getApplist(params);
       setMockData(res);
     } catch (error: any) {
+      console.log(error);
       Message.error(error?.message || t("APIerror"));
       setMockData([]);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
     getApplist(tab);
-  }, []);
+  }, [tab, category]); // 现在也监听 category 变化
 
   return (
     <div className="app-market-page">
@@ -60,6 +84,17 @@ function AppMarketPage() {
           }}>
           {t("submitSoftware")}
         </Button>
+        <Select
+          style={{ width: '200px', marginBottom: '16px' }}
+          placeholder={t('selectCategory')}
+          onChange={setCategory}
+          defaultValue=""
+        >
+          <Option value="">全部</Option>
+          {appCategory.map(cat => (
+            <Option key={cat.value} value={cat.value}>{cat.label}</Option>
+          ))}
+        </Select>
         <Tabs
           tabPosition="top"
           animation

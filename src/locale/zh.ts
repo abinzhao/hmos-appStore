@@ -17,6 +17,7 @@ export default {
     inputPhoneNumber: "请输入手机号",
     inputUserName: "请输入用户名",
     inputPassword: "请输入密码",
+    inputEmail: '请输入邮箱',
     oneClickExperience: "一键体验",
     returnToLogin: "返回登录",
     register: "注册",
@@ -28,4 +29,5 @@ export default {
     appRemoved: "下架",
     appRemovedPupupTitle: "下架软件",
     appRemovedPupupDesc: "你确认要下架软件？这会同步删除该软件，请慎重操作。",
+    editUserInfo: '修改个人信息',
 }

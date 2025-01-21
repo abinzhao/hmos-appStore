@@ -25,6 +25,11 @@ class HttpClient {
 
     this.instance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
+        const token = localStorage.getItem("token");
+        if (token) {
+          config.headers.Authorization = token;
+        }
+
         if (this._requestSuccessHandler) {
           this._requestSuccessHandler(config)
         }
@@ -46,6 +51,11 @@ class HttpClient {
         return response.data
       },
       (error: AxiosError) => {
+        if (error.response?.status === 401) {
+          localStorage.removeItem("token");
+          window.location.href = window.location.origin + "/login";
+        }
+        
         if (this._responseErrorHandler) {
           this._responseErrorHandler(error)
         }
@@ -97,6 +107,7 @@ class HttpClient {
   public request(config: InternalAxiosRequestConfig): Promise<any> {
     return this.instance.request(config)
   }
+
 }
 
 function useHttpClient({

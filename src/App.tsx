@@ -8,7 +8,6 @@ import AppHeader from "./views/header";
 import SideBar from "./views/sideBar";
 import "./App.css";
 import { useGlobalStore, useUserStore } from "./store";
-import { httpFront } from "./http/instance";
 import { userRequest } from "./http/api";
 
 const Sider = Layout.Sider;
@@ -26,6 +25,12 @@ function App() {
   useEffect(() => {
     getUser();
   }, []);
+  const { initializeUser } = useUserStore();
+
+  useEffect(() => {
+    // 初始化用户信息
+    initializeUser();
+  }, [initializeUser]);
   useEffect(() => {
     i18n.changeLanguage(locale);
     switch (locale) {
@@ -52,15 +57,45 @@ function App() {
     }
   };
   async function getUser() {
-    if (localStorage.getItem("experience")) return;
+    if (localStorage.getItem("experience")) {
+      setUser({
+        id: "experience",
+        username: "体验用户",
+        email: "",
+        avatar: "",
+        role: "user",
+        nickname: "",
+        password: "",
+        created_at: ""
+      });
+      return;
+    }
+
     const token = localStorage.getItem("token");
     if (!token) {
       navigator("/login");
       return;
     }
-    httpFront.instance.defaults.headers.common["Authorization"] = token;
-    const res = await userRequest.getUser();
-    setUser(res);
+
+    try {
+      const res = await userRequest.getCurrentUser();
+      if (res.user) {
+        setUser({
+          id: res.user.id,
+          username: res.user.username,
+          email: res.user.email || "",
+          avatar: res.user.avatar || "",
+          role: res.user.user_role || "user",
+          nickname: res.user.nickname,
+          password: "",
+          created_at: res.user.created_at,
+        });
+      }
+    } catch (error) {
+      console.error("Failed to get user info:", error);
+      localStorage.removeItem("token");
+      navigator("/login");
+    }
   }
   return (
     <ConfigProvider locale={localeConfig}>

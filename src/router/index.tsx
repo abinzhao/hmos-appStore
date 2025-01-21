@@ -1,13 +1,26 @@
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
-import App from "../App.tsx";
+import { Suspense } from 'react';
+import App from "../App";
 import ErrorPage from "../pages/error";
-import Register from "../views/Register.tsx";
-import AppMarketPage from "../pages/app-market/index.tsx";
-import UserCenterPage from "../pages/user-center/index.tsx";
-import HomePage from "../pages/home/index.tsx";
-import LoginPage from "../pages/login/index.tsx";
-import EditAPPPage from "../pages/edit-app/index.tsx";
-import AdminAppPage from "../pages/admin-app/index.tsx";
+import Register from "../views/Register";
+import LoginPage from "../pages/login";
+import { ProtectedRoute } from "../components/ProtectedRoute";
+import { routes } from './routes';
+import AppDetailPage from "../pages/app-detail";
+
+const generateRoutes = () => {
+  return routes.map(route => ({
+    path: route.path,
+    element: (
+      <ProtectedRoute requiredRole={route.requiredRole}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <route.element />
+        </Suspense>
+      </ProtectedRoute>
+    )
+  }));
+};
+
 const router = createBrowserRouter([
   {
     path: "/register",
@@ -22,34 +35,19 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      {
-        path: "/home",
-        element: <HomePage />,
-      },
-      {
-        path: "/appMarket",
-        element: <AppMarketPage />,
-      },
-      {
-        path: "/userCenter",
-        element: <UserCenterPage />,
-      },
-      {
-        path: "/editApp",
-        element: <EditAPPPage />,
-      },
-      {
-        path: "/adminApp",
-        element: <AdminAppPage />,
-      },
+      ...generateRoutes(),
       {
         path: "/",
-        element: <Navigate to="/home" replace />,
+        element: <Navigate to="/appMarket" replace />,
       },
     ],
   },
+  {
+    path: "/appDetail",
+    element: <AppDetailPage />,
+  },
 ]);
-function Router() {
+
+export default function Router() {
   return <RouterProvider router={router} />;
 }
-export default Router;

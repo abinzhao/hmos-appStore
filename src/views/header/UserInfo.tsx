@@ -4,17 +4,30 @@ import { useUserStore } from "../../store";
 
 function UserInfo() {
   const navigate = useNavigate();
-  const { user } = useUserStore();
+  const { user, setUser } = useUserStore();
+
   const userMenu = [
     {
       id: "1",
       name: "退出登录",
       onClick: () => {
-        navigate("/login");
         localStorage.removeItem("token");
+        localStorage.removeItem("experience");
+        setUser({
+          id: "",
+          username: "未登录",
+          email: "",
+          avatar: "",
+          role: "",
+          created_at: "",
+          nickname: "",
+          password: ""
+        });
+        navigate("/login");
       },
     },
   ];
+
   const dropList = (
     <Menu>
       {userMenu.map((menu) => {
@@ -26,6 +39,7 @@ function UserInfo() {
       })}
     </Menu>
   );
+
   return (
     <Dropdown droplist={dropList} position="bottom">
       <Avatar

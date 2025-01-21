@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ConfigProvider, Input, Button } from "@arco-design/web-react";
+import { ConfigProvider, Input, Button, Message } from "@arco-design/web-react";
 import { IconUser, IconLock } from "@arco-design/web-react/icon";
 import zhCN from "@arco-design/web-react/es/locale/zh-CN";
 import enUS from "@arco-design/web-react/es/locale/en-US";
-import { useGlobalStore } from "../../store";
+import { useGlobalStore, useUserStore } from "../../store";
 import { userRequest } from "../../http/api";
 
 function LoginPage() {
@@ -13,6 +13,7 @@ function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { theme, locale } = useGlobalStore();
+  const { setUser } = useUserStore();
   function toggleTheme() {
     theme.map((x, i) => {
       document.body.style.setProperty("--primary-" + (i + 1), x);
@@ -41,10 +42,30 @@ function LoginPage() {
   }, []);
 
   async function login() {
-    const res = await userRequest.login({ username, password });
-    const token = `Bearer ${res.data}`;
-    localStorage.setItem("token", token);
-    navigate("/home");
+    try {
+      const res = await userRequest.login({ username, password });
+      if (res) {
+        const token = `Bearer ${res.token}`;
+        localStorage.setItem("token", token);
+        // 设置用户信息到 store
+        setUser({
+          id: res.user.id,
+          nickname: res.user.nickname,
+          username: res.user.username,
+          email: res.user.email || "",
+          created_at: res.user.created_at || "",
+          avatar: res.user.avatar || "",
+          role: res.user.user_role || "user",
+          password: ""
+        });
+
+        Message.success("登录成功");
+        navigate("/home");
+      }
+    } catch (error) {
+      console.log(error);
+      Message.error("登录失败，请检查用户名和密码");
+    }
   }
   async function experience() {
     localStorage.setItem("experience", "true");

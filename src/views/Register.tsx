@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ConfigProvider, Message, Input, Button } from "@arco-design/web-react";
-import { IconUser, IconLock, IconPhone } from "@arco-design/web-react/icon";
+import { IconUser, IconLock, IconPhone, IconEmail } from "@arco-design/web-react/icon";
 import zhCN from "@arco-design/web-react/es/locale/zh-CN";
 import enUS from "@arco-design/web-react/es/locale/en-US";
 import { useGlobalStore } from "../store";
@@ -11,6 +11,7 @@ import { userRequest } from "../http/api";
 function Login() {
   const navigate = useNavigate();
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { theme, locale } = useGlobalStore();
@@ -42,8 +43,9 @@ function Login() {
   }, []);
 
   async function register() {
-    const { data, message } = await userRequest.register({ phone, username, password });
+    const { data, message } = await userRequest.register({ email, username, password });
     Message.success(message);
+    navigate("/login");
   }
   async function experience() {
     localStorage.setItem("experience", "true");
@@ -66,14 +68,14 @@ function Login() {
             </div>
             <div className="mt-8 w-72">
               <Input
-                value={phone}
+                value={email}
                 onChange={(v) => {
-                  setPhone(v);
+                  setEmail(v);
                 }}
                 size="large"
-                prefix={<IconPhone />}
+                prefix={<IconEmail />}
                 allowClear
-                placeholder={t("inputPhoneNumber")}
+                placeholder={t("inputEmail")}
               />
             </div>
             <div className="mt-5 w-72">

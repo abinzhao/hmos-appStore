@@ -1,0 +1,17 @@
+/* 定义 scrollable-table 类以控制表格的滚动行为 */
+.scrollable-table {
+  max-height: 415px; /* 设置您期望的最大高度 */
+  overflow-y: auto;   /* 启用垂直滚动条 */
+  /* 确保表头固定，仅表格体滚动 */
+  .arco-table-body {
+    overflow-y: visible;
+  }
+  
+  /* 如果需要的话，也可以单独设置表头的样式 */
+  .arco-table-header {
+    position: sticky;
+    top: 0;
+    background-color: white; /* 或者您想要的颜色 */
+    z-index: 1; /* 确保表头在滚动时不会被其他元素覆盖 */
+  }
+}
