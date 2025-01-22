@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { Button, Card, Empty, List, Message, Spin, Tabs, Select } from "@arco-design/web-react";
 import { useEffect, useState } from "react";
-import NotFoundPng from "../../assets/image/404.png";
 import AppItemCard from "./item-card";
 import appMarketRequest from "../../http/api/app-market";
 import { IconShareExternal } from "@arco-design/web-react/icon";
 import { useNavigate } from "react-router-dom";
 import { appCategory } from "../edit-app/contants";
+import { APP_404 } from "../../assets/common";
 const TabPane = Tabs.TabPane;
 const Option = Select.Option;
 
@@ -71,14 +71,15 @@ function AppMarketPage() {
           {t("submitSoftware")}
         </Button>
         <Select
-          style={{ width: '200px', marginBottom: '16px' }}
-          placeholder={t('selectCategory')}
+          style={{ width: "200px", marginBottom: "16px" }}
+          placeholder={t("selectCategory")}
           onChange={setCategory}
-          defaultValue=""
-        >
+          defaultValue="">
           <Option value="">全部</Option>
-          {appCategory.map(cat => (
-            <Option key={cat.value} value={cat.value}>{cat.label}</Option>
+          {appCategory.map((cat) => (
+            <Option key={cat.value} value={cat.value}>
+              {cat.label}
+            </Option>
           ))}
         </Select>
         <Tabs
@@ -99,7 +100,7 @@ function AppMarketPage() {
                   {loading ? (
                     <Spin dot loading />
                   ) : (
-                    <Empty imgSrc={NotFoundPng} description={t("noPage")} />
+                    <Empty imgSrc={APP_404} description={t("noPage")} />
                   )}
                 </div>
               ) : (

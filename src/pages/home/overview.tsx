@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { Grid, Card, Typography, Divider, Skeleton } from "@arco-design/web-react";
 import styles from "./overview.module.scss";
 import { useUserStore } from "../../store";
+import { APP_ICON, APP_INSTALL } from "../../assets/common";
 
 const { Row, Col } = Grid;
 
@@ -45,7 +46,7 @@ function Overview(props: { appTotal: number; totalInstallations: number }) {
       <Row>
         <Col flex={1}>
           <StatisticItem
-            icon={"src/assets/image/APP.png"}
+            icon={APP_ICON}
             title={"应用总数"}
             count={appTotal}
             loading={false}
@@ -55,7 +56,7 @@ function Overview(props: { appTotal: number; totalInstallations: number }) {
         <Divider type="vertical" className={styles.divider} />
         <Col flex={1}>
           <StatisticItem
-            icon={"src/assets/image/install.png"}
+            icon={APP_INSTALL}
             title={"应用安装次数"}
             count={totalInstallations}
             loading={false}
