@@ -7,6 +7,7 @@ import zhCN from "@arco-design/web-react/es/locale/zh-CN";
 import enUS from "@arco-design/web-react/es/locale/en-US";
 import { useGlobalStore, useUserStore } from "../../store";
 import { userRequest } from "../../http/api";
+import { PAGE_LOGO, PAGE_LOGO_ALT, PAGE_TITLE } from "../../assets/common";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ function LoginPage() {
           created_at: res.user.created_at || "",
           avatar: res.user.avatar || "",
           role: res.user.user_role || "user",
-          password: ""
+          password: "",
         });
 
         Message.success("登录成功");
@@ -78,13 +79,13 @@ function LoginPage() {
         style={{ background: "linear-gradient(135deg, #e0f7fa, #ffffff)" }}
         className="w-full h-full flex items-center justify-center">
         <div className="max-w-3xl min-w-80 shadow-2xl p-8 flex items-center">
-          <img className="w-72 mr-4" src="/src/assets/image/cat.png" />
+          <img className="w-72 mr-4" src={PAGE_LOGO_ALT} />
           <div>
             <div className="flex items-center justify-center border-gray-20">
               <div className="h-12 w-12 rounded flex items-center justify-center flex-shrink-0">
-                <img className="text-2xl" src="./src/assets/image/hmos-logo.png" />
+                <img className="text-2xl" src={PAGE_LOGO} />
               </div>
-              <div className="title text-2xl font-bold ml-4">HMOS App Store</div>
+              <div className="title text-2xl font-bold ml-4">{PAGE_TITLE}</div>
             </div>
             <div className="mt-8 w-72">
               <Input
@@ -110,11 +111,15 @@ function LoginPage() {
                 placeholder={t("inputPassword")}
               />
             </div>
-            <div className="flex items-center justify-between mt-8">
-              <Button type="outline" size="large" onClick={experience}>
+            <div className="flex items-center justify-center mt-8">
+              {/* <Button type="outline" size="large" onClick={experience}>
                 {t("oneClickExperience")}
-              </Button>
-              <Button type="outline" size="large" onClick={() => navigate("/register")}>
+              </Button> */}
+              <Button
+                className={"mr-4"}
+                type="outline"
+                size="large"
+                onClick={() => navigate("/register")}>
                 {t("register")}
               </Button>
               <Button type="primary" size="large" onClick={login}>

@@ -2,6 +2,7 @@ import { Menu } from "@arco-design/web-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUserStore } from "../../store";
 import { routes, RouteConfig } from "../../router/routes";
+import { PAGE_LOGO, PAGE_TITLE } from "../../assets/common";
 
 const MenuItem = Menu.Item;
 
@@ -24,9 +25,9 @@ function SideBar() {
   return (
     <div className="h-full">
       <div className="flex items-center justify-center h-16">
-        <img className="h-8" src="/src/assets/image/hmos-logo.png" alt="logo" />
+        <img className="h-8" src={PAGE_LOGO} alt="logo" />
         <span className="ml-2 text-xl font-bold" style={{ color: "rgb(var(--primary-6))" }}>
-          HMOS 应用商店
+          {PAGE_TITLE}
         </span>
       </div>
       <Menu selectedKeys={[location.pathname]} onClickMenuItem={(key) => navigate(key)}>

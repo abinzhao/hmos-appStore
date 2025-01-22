@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { Avatar, Card, Grid, List, Spin, Statistic, Tabs } from "@arco-design/web-react";
-import { IconArrowRise } from "@arco-design/web-react/icon";
+import { Avatar, Card, Grid, List, Spin, Tabs } from "@arco-design/web-react";
 import "./index.scss";
 import { useEffect, useState } from "react";
 import { appMarketRequest, appMessageRequest, systemMessageRequest } from "../../http/api";
 import { frontBaseURL } from "../../http/instance";
+import Overview from "./overview";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -48,7 +48,8 @@ function HomePage() {
           } else {
             setScrollLoading("下拉获取更多数据");
           }
-        }).catch(() => {
+        })
+        .catch(() => {
           setScrollLoading("No more data");
         });
     } else if (direction === "softwareMessage") {
@@ -74,7 +75,8 @@ function HomePage() {
           } else {
             setScrollLoading("下拉获取更多数据");
           }
-        }).catch(() => {
+        })
+        .catch(() => {
           setScrollLoading("No more data");
         });
     } else if (direction === "userFeedback") {
@@ -100,7 +102,8 @@ function HomePage() {
           } else {
             setScrollLoading("下拉获取更多数据");
           }
-        }).catch(() => {
+        })
+        .catch(() => {
           setScrollLoading("No more data");
         });
     }
@@ -132,34 +135,7 @@ function HomePage() {
 
   return (
     <div className="home-page">
-      <Row gutter={20} className={"mb-4"}>
-        <Col span={24} className={"text-xl font-bold"}>
-          {t("welcomeHMOSAppStore")}
-        </Col>
-      </Row>
-      <Row gutter={20} className={"mb-4"}>
-        <Col span={24}>{t("programmingDesc")}</Col>
-      </Row>
-      <Card
-        hoverable
-        style={{
-          borderRadius: "12px",
-        }}>
-        <Row>
-          <Statistic
-            title={t("appTotal")}
-            value={appTotal}
-            suffix={<IconArrowRise style={{ color: "#ee4d38" }} />}
-            style={{ marginRight: 60, marginBottom: 20 }}
-          />
-          <Statistic
-            title={t("totalInstallations")}
-            value={totalInstallations}
-            suffix={<IconArrowRise style={{ color: "#ee4d38" }} />}
-            style={{ marginRight: 60, marginBottom: 20 }}
-          />
-        </Row>
-      </Card>
+      <Overview appTotal={appTotal} totalInstallations={totalInstallations} />
       <Row gutter={20} className={"mb-4"} style={{ marginTop: 20 }}>
         <Col span={24}>
           <Card

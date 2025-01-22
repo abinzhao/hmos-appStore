@@ -20,6 +20,7 @@ const generateRoutes = () => {
     )
   }));
 };
+console.log("🚀 ~ generateRoutes ~ generateRoutes:", generateRoutes);
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
       ...generateRoutes(),
       {
         path: "/",
-        element: <Navigate to="/appMarket" replace />,
+        element: <Navigate to="/home" replace />,
       },
     ],
   },
