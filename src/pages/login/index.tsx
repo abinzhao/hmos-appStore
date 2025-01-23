@@ -112,9 +112,14 @@ function LoginPage() {
               />
             </div>
             <div className="flex items-center justify-center mt-8">
-              {/* <Button type="outline" size="large" onClick={experience}>
+              <Button
+                className={"mr-4"}
+                hidden={location.hostname === "localhost"}
+                type="outline"
+                size="large"
+                onClick={experience}>
                 {t("oneClickExperience")}
-              </Button> */}
+              </Button>
               <Button
                 className={"mr-4"}
                 type="outline"

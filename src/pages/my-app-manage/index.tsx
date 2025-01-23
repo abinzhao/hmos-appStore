@@ -10,8 +10,8 @@ import {
   Space,
   Form,
   Popconfirm,
-  InputNumber,
   Grid,
+  Tag,
 } from "@arco-design/web-react";
 import { IconDelete, IconEdit } from "@arco-design/web-react/icon";
 import { appMarketRequest } from "../../http/api";
@@ -108,7 +108,7 @@ function AppManage() {
 
   const columns = [
     {
-      title: "id",
+      title: "ID",
       dataIndex: "id",
       width: 50,
     },
@@ -141,6 +141,9 @@ function AppManage() {
       title: "软件版本",
       dataIndex: "app_version",
       width: 100,
+      render: (text: any) => {
+        return <Tag color="green">{text}</Tag>;
+      },
     },
     {
       title: "审核状态",
@@ -149,7 +152,7 @@ function AppManage() {
       render: (text: any) => {
         for (const appStatus of appStatusData) {
           if (text === appStatus.value) {
-            return appStatus.title;
+            return <Tag color="blue">{appStatus.title}</Tag>;
           }
         }
         return "未定义的值";
@@ -160,16 +163,16 @@ function AppManage() {
       dataIndex: "app_icon",
       width: 230,
     },
-    {
-      title: "软件截图",
-      dataIndex: "app_screenshot",
-      width: 230,
-    },
-    {
-      title: "软件地址",
-      dataIndex: "app_file_url",
-      width: 230,
-    },
+    // {
+    //   title: "软件截图",
+    //   dataIndex: "app_screenshot",
+    //   width: 230,
+    // },
+    // {
+    //   title: "软件地址",
+    //   dataIndex: "app_file_url",
+    //   width: 230,
+    // },
     {
       title: "发布时间",
       dataIndex: "created_at",
@@ -181,6 +184,7 @@ function AppManage() {
     {
       title: "操作",
       fixed: "left",
+      width: 100,
       render: (_: any, record: AppData) => (
         <Space>
           <Button
@@ -253,36 +257,21 @@ function AppManage() {
                   </Form.Item>
                 </Grid.Col>
                 <Grid.Col span={6}>
-                  <Form.Item label="描述" field="app_description">
-                    <Input placeholder="描述" />
+                  <Form.Item label="应用类别" field="app_category">
+                    <Input placeholder="应用类别" />
                   </Form.Item>
                 </Grid.Col>
               </Grid.Row>
               <Grid.Row gutter={24}>
                 <Grid.Col span={6}>
-                  <Form.Item label="应用类别" field="app_category">
-                    <Input placeholder="应用类别" />
-                  </Form.Item>
-                </Grid.Col>
-                <Grid.Col span={6}>
                   <Form.Item label="应用状态" field="application_status">
-                    <Select placeholder="Select" style={{ width: 154 }} allowClear>
+                    <Select placeholder="Select" allowClear>
                       {appStatusData.map((appStatus, index) => (
                         <Option key={index} value={appStatus.value}>
                           {appStatus.title}
                         </Option>
                       ))}
                     </Select>
-                  </Form.Item>
-                </Grid.Col>
-                <Grid.Col span={6}>
-                  <Form.Item label="最小下载量" field="min_install_count">
-                    <InputNumber placeholder="最小下载量" />
-                  </Form.Item>
-                </Grid.Col>
-                <Grid.Col span={6}>
-                  <Form.Item label="最大下载量" field="max_install_count">
-                    <InputNumber placeholder="最大下载量" />
                   </Form.Item>
                 </Grid.Col>
               </Grid.Row>
